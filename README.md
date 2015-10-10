@@ -1,6 +1,9 @@
-How to compile SASS in [Sails](http://sailsjs.org)
+
+How to compile SASS in [Sails](http://sailsjs.org) without Ruby
 ==================================================
 > Build: Sails 0.10.x
+
+*This tasks differs from [sails101/using-sass](https://github.com/sails101/using-sass) in that it uses libsass, a C/C++ port of the Sass engine. This removes the need to have Ruby installed to use Sass. This does, however, lack features like Compass support*
 
 ## Sass task
 
@@ -8,14 +11,16 @@ Run this task with the grunt sass command.
 
 Sass is a preprocessor that adds nested rules, variables, mixins and functions, selector inheritance, and more to CSS. Sass files compile into well-formatted, standard CSS to use in your site or application.
 
-This task requires you to have [Ruby](http://www.ruby-lang.org/en/downloads/) and [Sass](http://sass-lang.com/download.html) installed. If you're on OS X or Linux you probably already have Ruby installed; test with ruby -v in your terminal. When you've confirmed you have Ruby installed, `run gem install sass` to install Sass.
-
 NOTE: Above text taken from [grunt-contrib-sass](https://www.npmjs.org/package/grunt-contrib-sass)
+
+libsass.. is a Sass compiler in C++. In contrast to the original Ruby compiler, this one is much faster, but is missing some features, though improving quickly. It also doesn't support Compass. Check out grunt-contrib-sass if you prefer something more stable, but slower.
+
+NOTE: Above text taken from [grunt-sass](https://www.npmjs.org/package/grunt-sass)
 
 ## Set up and Configure
 
 * Create a new Sails app: `sails new path_to_app`
-* Install dependency: `npm install --save grunt-contrib-sass`
+* Install dependency: `npm install --save grunt-sass`
 * Add `importer.scss` file to the `assets` > `styles`
 ```
 /**
@@ -58,7 +63,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-sass');
 };
 ```
 * Edit `copy.js` in `tasks` > `config`, add file copy exclusions for SASS and SCSS:
